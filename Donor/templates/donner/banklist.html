@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Bloodbank list</title>
+
+  {% endblock %}
+	{% block content %}
+		{% load static %}
+<br><br>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+{% for Bloodbank in object_list %}
+
+  <tbody>
+    <tr>
+      <td>{{Bloodbank.name}}</th>
+      <td>{{Bloodbank.phone}}</td>
+      <td>{{Bloodbank.loaction}}</td>
+    </tr>
+  </tbody>
+   {% endfor %}
+</table>
+<p><b>*Note: with time, phone numbers may change.  So, in case, the listed phone number isn’t reachable. You may call 197 (Inquiry) and get the updated phone number of the respective blood bank.</b></p>
+
+	{% endblock %}

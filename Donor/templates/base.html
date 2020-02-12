@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{% block title %}
+		<title>Sustainable Blood (SuB)</title>
+	{% endblock %}
+	<meta charset="utf-8" />
+	{% load static %}
+
+	<!-- for bootstrap -->
+	<script src="{% static 'Donner/js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'Donner/js/bootstrap.js' %}" type="text/javascript"></script>
+	<link rel="stylesheet" href="{% static 'Donner/css/bootstrap.css' %}" type = "text/css"/>
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<!-- for costom css -->
+	<link rel="stylesheet" href="{% static 'Donner/css/style.css' %}" type = "text/css"/>
+	<!-- for logo -->
+	<link rel="shortcut icon" href="{% static 'favicon.png' %}"/>
+	<!-- for fontawesome -->
+	<link rel="stylesheet" href="{% static 'Donner/fontawesome-5.3.1/css/all.css' %}" type = "text/css"/>
+
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  			<a class="navbar-brand" href="{% url 'home' %}"></a>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    		<span class="navbar-toggler-icon"></span>
+  			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="{% url 'home' %}">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'bloodbank' %}">Blood Bank</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'event' %}">News & Events</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'about' %}">About Us</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+					</li>
+					<li class="nav-item">
+						{% if user.is_superuser %}
+							<a class="nav-link" href="/admin">Admin</a>
+						{% else %}
+
+						{% endif %}
+					</li>
+				</ul>
+
+				{% if request.user.is_authenticated %}
+
+					<h4><small class="text-muted" style="margin-right: 20px;">WELCOME <a href="/accounts/profile">{{ user.first_name.upper }}</a>
+                 	<a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+             		</small></h4>
+                {% else %}
+                	<h4><small class="text-muted" style="margin-right: 20px;">WELCOME USER
+						<a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
+            		</small></h4>{%endif %}
+			</div>
+		</nav>
+	</header>
+	{% block content %}
+
+	{% endblock %}
+	<footer>
+		<!-- for ajax -->
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<!-- for costom js -->
+		<script src="{% static 'Donner/js/main.js' %}"></script>
+		{% block javascript %}
+		{% endblock %}
+	</footer>
+
+
+</body>
+
+</html>
+
+

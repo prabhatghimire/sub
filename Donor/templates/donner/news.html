@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+	{% block content %}
+		{% load static %}
+  
+<div style="margin: 5em">
+    <h1 style="text-align: center">{{news.title}}</h1>
+    <img src="{{news.photo.url}}" alt="photo" style="height: 300px;">
+    <p>
+      {{news.detail}}
+    </p>
+    <p>{{news.anouncedate}}</p>
+    <p>{{news.organizer}}</p>
+    <p>{{news.location}}</p>
+    <p>{{news.posteddate}}</p>
+</div>
+
+    {% endblock %}

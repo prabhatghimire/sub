@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+	{% block content %}
+		{% load static %}
+<div id="section6" class="container-fluid bg-secondary" style="padding-top:70px;padding-bottom:70px">
+  <h1>Contact Us</h1>
+    <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Phone Number
+                </button>
+              </h5>
+          </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                01-******* <br>
+                98********
+              </div>
+          </div>
+        </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Location
+              </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5775625368774!2d85.28821366461966!3d27.699448432795084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1860d8637fa9%3A0x9d568496ee96431d!2sNepal+Red+Cross+Society%2C+Red+Cross+Rd%2C+Kathmandu+44600!5e0!3m2!1sen!2snp!4v1533221303692" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+      </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          E-mail
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+       youthredcrosscircle@gmail.com
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+	{% endblock %}

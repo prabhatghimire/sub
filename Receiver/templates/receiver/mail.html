@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+  {% block content %}
+<!-- {% block title %}Login{% endblock %} -->
+    {% load staticfiles %}
+
+
+
+<div style=" margin-left: 28%; margin-top: 3%">
+    <form method="POST" action="{% url 'mail' %}">
+
+     <div class="form-row">
+    <div class="form-group col-md-6" >
+      {% csrf_token %}
+      {{ form }}
+    </div>
+  </div>
+    <button class="btn btn-outline-success" name="sumbit" type='submit'>Go</button>
+    </form>
+
+    </div>
+
+
+  {% endblock %}

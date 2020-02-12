@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+	{% block content %}
+		{% load static %}
+
+  {% for  Event in  object_list%}
+
+
+
+<div class="img">
+  <img src="{{ Event.photo.url }}" alt="Gallery" width="250px" height="170px">
+  <div class="desc"><b>{{Event.title}}</b></div>
+  <div class="desc">{{Event.detail}}<br> <br>
+    <a href="{% url 'event' Event.id %}" class="btn btn-outline-dark"><span>Read More...</span></a>
+  </div>
+</div>
+
+
+  {% endfor %}
+
+    {% endblock %}

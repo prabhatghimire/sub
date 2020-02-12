@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+   {% if user.is_authenticated %}
+
+        <dev class="container">
+            <h1>{{ user.first_name }} welcome to your profile page</h1>
+        <!-- <img src="user.avatar.url"> -->
+        <b>Name:</b> {{ user.first_name }} {{ user.middle_name }}  {{ user.last_name }} <br>
+        <b>E-mail:</b> {{ user.email }} <br>
+        <b>Last Donate Date:</b> {{ user.last_donate_date }} <br>
+        <b>Address:</b> {{ user.municipality }}, {{ user.district }} <br>
+        <b>Phone:</b> {{ user.phone }} <br>
+        <b>Time of donation:</b> {{user.donation_no}}   <br>
+        <!-- <b>Date of Birth:</b>{{ user.birth_date }}   <br> -->
+        <b>Blood Group:</b> {{ user.bloodgroup }} <br>
+            <a href="{% url 'change_password'%}">Change Password</a>    <br>
+            <a href="{% url 'profile_update'%}">Edit Profile</a>    <br>
+            <a href="{% url 'del_user' user.email  %}">delete user</a>
+
+        </dev>
+    {% endif %}
+
+
+{% endblock %}

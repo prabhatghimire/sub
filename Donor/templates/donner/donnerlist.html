@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+  {% block content %}
+    {% load staticfiles %}
+    {% if result %}
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">NAME</th>
+      <!-- <th scope="col">ADDRESS</th> -->
+      <th scope="col">BLOOD GROUP</th>
+      <th scope="col">PHONE</th>
+      <th scope="col">LAST DONATE DATE</th>
+      <!-- <th scope="col">E-MAIL DONNER</th> -->
+    </tr>
+  </thead>
+{% for Donner in result %}
+
+  <tbody>
+    <tr>
+      <td>{{Donner.first_name}} {{Donner.middle_name}} {{Donner.last_name}}</th>
+      <!-- <td>Donner.municipality, Donner.district</td> -->
+      <td>{{Donner.bloodgroup}}</td>
+      <td>{{Donner.phone}}</td>
+      <td>{{Donner.last_donate_date}}</td>
+      <!-- <td><a href=" url 'mail' ">MAIL</a></td> -->
+    </tr>
+  </tbody>
+   {% endfor %}
+   {% else %}
+    <h1> Sorry no result found for now</h1>
+{% endif %}
+</table>
+
+
+
+
+
+
+
+  {% endblock %}

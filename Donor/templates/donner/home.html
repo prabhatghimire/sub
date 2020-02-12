@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Home</title>
+
+{% endblock %}
+{% block content %}
+{% load static %}
+
+{% block javascript %}
+<script type="text/javascript">
+  function removeAllOptions(selectbox) {
+    var i;
+    for (i = selectbox.options.length - 1; i >= 0; i--) {
+      selectbox.remove(i);
+    }
+  }
+  $("#id_District").change(function () {
+    var District = $(this).val();
+
+    $.ajax({
+      url: '{% url "home" %}',
+      data: {
+        'District': District
+      },
+      dataType: 'json',
+      success: function (data) {
+        var selectBox = document.getElementById('id_Municipality');
+        removeAllOptions(selectBox);
+        if (data.result) {
+          for (var i = data.result.length - 1; i >= 0; i--) {
+            var option = data.result[i].municipality;
+            selectBox.options.add(new Option(option.text = option, option.value = option));
+          }
+        }
+      }
+    });
+
+  });
+</script>
+{% endblock %}
+
+
+{% load bootstrap4 %}
+<script src="{% static 'Donner/main.js' %}"></script>
+
+
+<!-- {#% include "donner/includes/logo.html" %#} -->
+<div class="row" id="box-search">
+  <div class="thumbnail text-center">
+    <img src="{% static 'Donner/img/redcross.jpg' %}" alt="background image" class="img-fluid" width="100%" height="auto">
+    <div class="caption">
+      <p>NEED BLOOD?</p>
+      <form class='my-ajax-form' method='POST' action='.' data-url="/">
+        <p> {% csrf_token %}
+          <div class="row" style="margin-left: 30%">
+            <div class="col-2">
+              {{ form.BloodGroup}}
+            </div>
+            <div class="col-2">
+              {{ form.District }}
+            </div>
+            <div class="col-2">
+              {{ form.Municipality }}
+            </div>
+            {{ error}}
+          </div>
+        </p>
+        <p> <button class="btn btn-outline-success my-2 my-sm-0" name="sumbit" type='submit'>Search</button></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron text-center">
+  <h1>You don't have to be a Doctor to save lives, <br> just donate blood.</h1>
+  <p>it's safe, it's simple, and it saves lives.</p>
+</div>
+
+<div>
+  <div class="row">
+  <div class="col-sm-4">
+    <div class="img">
+      <img src="{% static 'Donner/img/service.png' %}" alt="Gallery">
+      <div class="desc"><b>Services</b></div>
+      <div class="desc">We provide emergency blood to save life<br> <br>
+        <a href="/" class="btn btn-outline-dark"><span>Services</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="img">
+      <img src="{% static 'Donner/img/work.png' %}" alt="Gallery">
+      <div class="desc"><b>Our work</b></div>
+      <div class="desc">We volunteer to make society better <br> <br>
+        <a href="/news&events" class="btn btn-outline-dark"><span>Our Work</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="img">
+      <img src="{% static 'Donner/img/contact.png' %}" alt="Gallery">
+      <div class="desc"><b>Contact Us</b></div>
+      <div class="desc">Anything you want to suggest?<br> <br>
+        <a href="/contact" class="btn btn-outline-dark"><span>Contact Us</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+	{% block content %}
+		{% load staticfiles %}
+
+{% for user in name %}
+
+
+      <h1>Thanks for your concern {{user.name}}</h1>
+
+
+{% endfor %}
+
+
+	{% endblock %}

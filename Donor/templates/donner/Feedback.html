@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+	
+
+<div style=" margin-left: 20%;margin-right: 20%; margin-top: 3%">
+<form method="POST" action="{% url 'feedback' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-outline-primary" name="sumbit" type='submit'>Sumbit</button>
+
+  </form>
+</div>
+   
+
+	{% endblock %}
