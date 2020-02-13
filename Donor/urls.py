@@ -20,16 +20,16 @@ from Donor.models import Bloodbank, Event
 from django.urls import path
 
 from graphene_django.views import GraphQLView
+from graphql_jwt.decorators import jwt_cookie
 from django.views.decorators.csrf import csrf_exempt
 
 
 
 urlpatterns = [
     path('', views.home, name='home'), #for home page url
-    #path('graphql/', PrivateGraphQLView.as_view(graphiql=True)),
-    path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True))),
     path('bloodbank/', ListView.as_view(queryset=Bloodbank.objects.all().order_by("id")[:25], template_name='donner/banklist.html'),name='bloodbank',),  #to dispaly bloodbank url
-    path('news&events/', ListView.as_view(queryset=Event.objects.all().order_by("-id")[:25], template_name='donner/News & Events.html'),name='event'),    #get news and event form database and dispaly it 
+    path('news&events/', ListView.as_view(queryset=Event.objects.all().order_by("-id")[:25], template_name='donner/News & Events.html'),name='event'),    #get news and event form database and dispaly it
     path('news&events/<int:pk>', views.newsView, name='event'),
     path('feedback/', views.feedback, name='feedback'), #feedback form url
     path('about/', views.about, name='about'),  #about url

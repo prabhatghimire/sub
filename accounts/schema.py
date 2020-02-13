@@ -1,7 +1,6 @@
 import graphene
 
 from graphene_django.types import DjangoObjectType
-from graphene_django.filter import DjangoFilterConnectionField
 
 from django.contrib.auth import get_user_model
 
@@ -17,7 +16,7 @@ class UserType(DjangoObjectType):
         exclude = ['is_staff', 'is_active', 'is_superuser', 'groups',
                    'user_permissions', 'last_login', 'password', 'donation_no','id', 'avatar']
         interfaces = (relay.Node, )
-        
+
     """ @classmethod
     def get_queryset(cls, queryset, info):
         if info.context.user.is_anonymous:
@@ -29,7 +28,7 @@ class LocationType(DjangoObjectType):
     class Meta:
         model = Location
         interfaces = (relay.Node, )
-    
+
     """ @classmethod
     def get_queryset(cls, queryset, info):
         if info.context.user.is_anonymous:
