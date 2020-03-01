@@ -79,9 +79,9 @@ def backup(request):
 
 
 @login_required
-def del_user(request, username):
+def del_user(request, id):
     try:
-        u = User.objects.get(email=username)
+        u = User.objects.get(email=id)
         u.is_active = False
         u.save()
         #messages = {'success': 'Your account delete successfully'}

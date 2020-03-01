@@ -20,7 +20,7 @@
             <b>Blood Group:</b> {{ user.bloodgroup }} <br>
                 <a href="{% url 'change_password'%}">Change Password</a>    <br>
                 <a href="{% url 'profile_update'%}">Edit Profile</a>    <br>
-                <a href="{% url 'del_user' user.email  %}">delete user</a>
+                <a href="{% url 'del_user' user.id  %}">delete user</a>
         </div>
     {% endif %}
 {% endblock %}
