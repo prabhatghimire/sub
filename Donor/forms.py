@@ -98,7 +98,7 @@ class DonorForm(forms.Form):
 	BloodGroup = forms.ChoiceField(required = False, choices=BLOOD_CHOICES, widget=forms.Select())
 	District = forms.ChoiceField(choices=district, widget=forms.Select(attrs={'id': 'id_District'}))
 	Municipality = forms.ChoiceField(required = False, widget=forms.Select(attrs={'class':'', 'id': 'id_Municipality'}))
-	
+
 	class Meta:
                 fields = ['BloodGroup','District', 'Municipality']
 

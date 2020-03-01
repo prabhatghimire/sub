@@ -14,7 +14,7 @@ class UserType(DjangoObjectType):
     class Meta:
         model = User
         exclude = ['is_staff', 'is_active', 'is_superuser', 'groups',
-                   'user_permissions', 'last_login', 'password', 'donation_no','id', 'avatar']
+                   'user_permissions', 'last_login', 'password', 'donation_no', 'id', 'avatar']
         interfaces = (relay.Node, )
 
     """ @classmethod
@@ -47,22 +47,19 @@ class Query:
 
     def resolve_user(self, info, **kwargs):
         id = kwargs.get('id')
-        return User.objects.get(pk=id)
+        if info.context.user.is_anonymous:
+            raise Exception('Not logged in!')
+        return User.objects.filter(pk=id)
 
     def resolve_users(self, info):
-        user = info.context.user
-        if user.is_anonymous:
+        if info.context.user.is_anonymous:
             raise Exception('Not logged in!')
         return get_user_model().objects.all()
 
     def resolve_me(self, info):
-        user = info.context.user
-        if user.is_anonymous:
+        if info.context.user.is_anonymous:
             raise Exception('Not logged in!')
-
-        return user
-
-
+        return info.context.user
 
     def resolve_locations(self, info, **kwargs):
         user = info.context.user
@@ -77,9 +74,9 @@ class Query:
         municipality = kwargs.get('municipality')
         require_date = datetime.date.today() - datetime.timedelta(days=100)
         return User.objects.filter(Q(bloodgroup__icontains=bloodGroup) &
-                                   Q(district__icontains=district) &
+                                   Q(address__district__icontains=district) &
                                    Q(last_donate_date__lte=require_date) &
-                                   Q(municipality__icontains=municipality))
+                                   Q(address__municipality__icontains=municipality))
 
 
 class CreateLocation(graphene.Mutation):
@@ -98,8 +95,6 @@ class CreateLocation(graphene.Mutation):
         location.save()
 
         return CreateLocation(district=location.district, municipality=location.municipality)
-
-
 
 
 class CreateUser(graphene.Mutation):
@@ -127,30 +122,26 @@ class CreateUser(graphene.Mutation):
         lastDonateDate = graphene.types.datetime.DateTime()
         donationNo = graphene.Int()
 
-    def mutate(self, info, password, lastLogin, isSuperuser, isStaff, isActive, dateJoined, email, address, avatar, firstName, middleName, lastName, phone, bloodgroup, lastDonateDate, donationNo):
-        """ user = get_user_model()(
-            username=username,
-            email=email,
-        )
-        user.set_password(password)
-        user.save() """
+    def mutate(self, info, password, lastLogin, isSuperuser, isStaff,
+               isActive, dateJoined, email, address, avatar, firstName, middleName,
+               lastName, phone, bloodgroup, lastDonateDate, donationNo):
         user = get_user_model()(
-            password = password,
-            lastLogin = lastLogin,
-            isSuperuser = isSuperuser,
-            isStaff = isStaff,
-            isActive = isActive,
-            dateJoined = dateJoined,
-            email = email,
-            address = address,
-            avatar = avatar,
-            firstName = firstName,
-            middleName = middleName,
-            lastName = lastName,
-            phone = phone,
-            bloodgroup = bloodgroup,
-            lastDonateDate = lastDonateDate,
-            donationNo = donationNo
+            password=password,
+            lastLogin=lastLogin,
+            isSuperuser=isSuperuser,
+            isStaff=isStaff,
+            isActive=isActive,
+            dateJoined=dateJoined,
+            email=email,
+            address=address,
+            avatar=avatar,
+            firstName=firstName,
+            middleName=middleName,
+            lastName=lastName,
+            phone=phone,
+            bloodgroup=bloodgroup,
+            lastDonateDate=lastDonateDate,
+            donationNo=donationNo
         )
         user.set_password(password)
         user.save()
@@ -162,10 +153,12 @@ class Mutation:
     create_location = CreateLocation.Field()
     create_user = CreateUser.Field()
 
-
     def resolve_update_user(self, info, **kwargs):
         pass
 
     def resolve_delete_user(self, info, **kwargs):
         id = kwargs.get('id')
-        user = User.objects.delete(id)
+        user = User.objects.filter(pk=id)
+        user.is_active = False
+        user.save()
+        return user

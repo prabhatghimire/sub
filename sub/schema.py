@@ -5,11 +5,15 @@ import Donor.schema
 import accounts.schema
 
 
-class Query(Donor.schema.Query, accounts.schema.Query, graphene.ObjectType):
+class Query(Donor.schema.Query,
+            accounts.schema.Query,
+            graphene.ObjectType):
     pass
 
 
-class Mutation(Donor.schema.Mutation, accounts.schema.Mutation, graphene.ObjectType):
+class Mutation(Donor.schema.Mutation,
+               accounts.schema.Mutation,
+               graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()

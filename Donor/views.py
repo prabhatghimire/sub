@@ -37,9 +37,8 @@ def home(request):
     else:  # get request
         return render(request, 'donner/home.html', {'form': form})
 
+
 # display feedback form and on post request store feedback form on database
-
-
 def feedback(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
@@ -61,15 +60,14 @@ def feedback(request):
         form = FeedbackForm()
         return render(request, 'donner/Feedback.html', {'form': form})
 
+
+
 # dispaly about page
-
-
 def about(request):
     return render(request, 'donner/About Us.html')
 
+
 # display conatact us page
-
-
 def contact(request):
     return render(request, 'donner/contact Us.html')
 

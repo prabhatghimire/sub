@@ -27,7 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path('', views.home, name='home'), #for home page url
-    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True))),
+    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True)), name='graphql'),
     path('bloodbank/', ListView.as_view(queryset=Bloodbank.objects.all().order_by("id")[:25], template_name='donner/banklist.html'),name='bloodbank',),  #to dispaly bloodbank url
     path('news&events/', ListView.as_view(queryset=Event.objects.all().order_by("-id")[:25], template_name='donner/News & Events.html'),name='event'),    #get news and event form database and dispaly it
     path('news&events/<int:pk>', views.newsView, name='event'),

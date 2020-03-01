@@ -29,36 +29,32 @@ class feedbackType(DjangoObjectType):
 
 
 class Query:
-    event = graphene.List(eventType, id=graphene.Int())
+    event = graphene.List(eventType, id=graphene.ID())
     events = graphene.List(eventType)
-    bloodbank = graphene.List(bloodBankType, id=graphene.Int())
+    bloodbank = graphene.List(bloodBankType, id=graphene.ID())
     bloodbanks = graphene.List(bloodBankType)
     feedback = graphene.List(feedbackType, id=graphene.Int())
     feedbacks = graphene.List(feedbackType)
 
     def resolve_events(self, info, **kwargs):
-        if not info.context.user.is_authenticated:
-            return Event.objects.all()
+        return Event.objects.all()
+
+    def resolve_event(self, info, id, **kwargs):
+        return Event.objects.filter(pk=id)
 
     def resolve_bloodbanks(self, info, **kwargs):
         # We can easily optimize query count in the resolve method
         return Bloodbank.objects.all()
 
+    def resolve_bloodbank(self, info, id, **kwargs):
+        # We can easily optimize query count in the resolve method
+        return Bloodbank.objects.filter(pk=id)
+
     def resolve_feedbacks(self, info, **kwargs):
         return Feedback.objects.all()
 
-    def resolve_event(self, info, **kwargs):
-        id = kwargs.get('id')
-        return Event.objects.get(pk=id)
-
-    def resolve_bloodbank(self, info, **kwargs):
-        # We can easily optimize query count in the resolve method
-        id = kwargs.get('id')
-        return Bloodbank.objects.get(pk=id)
-
-    def resolve_feedback(self, info, **kwargs):
-        id = kwargs.get('id')
-        return Feedback.objects.get(pk=id)
+    def resolve_feedback(self, info, id, **kwargs):
+        return Feedback.objects.filter(pk=id)
 
 
 class CreateEvent(graphene.Mutation):
@@ -93,7 +89,6 @@ class CreateBloodBank(graphene.Mutation):
     phone = graphene.String()
     locction = graphene.String()
 
-
     # 2
     class Arguments:
         name = graphene.String()
@@ -110,7 +105,7 @@ class CreateBloodBank(graphene.Mutation):
 
 class CreateFeedBack(graphene.Mutation):
     """ name, email, subject, comment,"""
-    
+
     name = graphene.String()
     email = graphene.String()
     subject = graphene.String()
