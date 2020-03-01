@@ -17,11 +17,11 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-	path('signup/', views.signup, name='signup'), #signup page
-    path('', include('django.contrib.auth.urls')),	#default django for login and logout 
-    path('profile/', views.profile, name='profile'), #profile page
-    path('update/', views.profile_update, name='profile_update'), #profile update page
-    path('backup/', views.signup, name='backup'), #backup page
-    path('delete_user/<username>/', views.del_user, name='del_user'), #delete user
+    path('signup/', views.signup, name='signup'),
+    path('', include('django.contrib.auth.urls')),
+    path('profile/', views.profile, name='profile'),
+    path('update/', views.profile_update, name='profile_update'),
+    path('backup/', views.signup, name='backup'),
+    path('delete_user/<username>/', views.del_user, name='del_user'),
     path('password/', views.change_password, name='change_password'),
 ]
