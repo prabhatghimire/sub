@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'bootstrap4',
     'accounts',
     'Donor',
-    #'Receiver',
-    #'api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,7 +68,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ROOT_URLCONF = 'sub.urls'
-
 
 
 TEMPLATES = [
@@ -139,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #STATIC_ROOT = '/home/sustainable/sub/static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

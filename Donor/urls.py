@@ -16,7 +16,6 @@ Including another URLconf
 from . import views
 from django.views.generic import ListView
 
-from Donor.models import Bloodbank, Event
 from django.urls import path
 
 from graphene_django.views import GraphQLView
@@ -24,14 +23,15 @@ from graphql_jwt.decorators import jwt_cookie
 from django.views.decorators.csrf import csrf_exempt
 
 
-
 urlpatterns = [
-    path('', views.home, name='home'), #for home page url
+    path('', views.home, name='home'),  # for home page url
     path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True)), name='graphql'),
-    path('bloodbank/', ListView.as_view(queryset=Bloodbank.objects.all().order_by("id")[:25], template_name='donner/banklist.html'),name='bloodbank',),  #to dispaly bloodbank url
-    path('news&events/', ListView.as_view(queryset=Event.objects.all().order_by("-id")[:25], template_name='donner/News & Events.html'),name='event'),    #get news and event form database and dispaly it
+    # to dispaly bloodbank url
+    path('bloodbank/', views.bloodbank, name='bloodbank',),
+    # get news and event form database and dispaly it
+    path('news&events/', views.news, name='event'),
     path('news&events/<int:pk>', views.newsView, name='event'),
-    path('feedback/', views.feedback, name='feedback'), #feedback form url
-    path('about/', views.about, name='about'),  #about url
-    path('contact/', views.contact, name='contact'),    #contact us url
+    path('feedback/', views.feedback, name='feedback'),  # feedback form url
+    path('about/', views.about, name='about'),  # about url
+    path('contact/', views.contact, name='contact'),  # contact us url
 ]

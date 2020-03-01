@@ -30,22 +30,22 @@
   			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
+					<li class="nav-item {{ home }}">
 						<a class="nav-link" href="{% url 'home' %}">Home</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item {{ bloodbank }}">
 						<a class="nav-link" href="{% url 'bloodbank' %}">Blood Bank</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item {{ event }}">
 						<a class="nav-link" href="{% url 'event' %}">News & Events</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item {{ feedback }}">
 						<a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item {{ about }}">
 						<a class="nav-link" href="{% url 'about' %}">About Us</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item {{ contact }}">
 						<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
 					</li>
 						{% if user.is_superuser %}

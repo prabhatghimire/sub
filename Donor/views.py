@@ -2,7 +2,7 @@ from graphene_django.views import GraphQLView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from Donor.forms import DonorForm, FeedbackForm, MailForm
-from Donor.models import Feedback, Event
+from Donor.models import Feedback, Event, Bloodbank
 from accounts.models import User, Location
 from django.db.models import Q
 import datetime
@@ -35,7 +35,7 @@ def home(request):
             return render(request, 'donner/donnerlist.html', {'result': result})
         return render(request, 'donner/home.html', {'error': form.errors, 'form': form})
     else:  # get request
-        return render(request, 'donner/home.html', {'form': form})
+        return render(request, 'donner/home.html', {'form': form, 'home': 'active'})
 
 
 # display feedback form and on post request store feedback form on database
@@ -58,20 +58,29 @@ def feedback(request):
             return render(request, 'donner/feedback return.html', {'name': name})
     else:
         form = FeedbackForm()
-        return render(request, 'donner/Feedback.html', {'form': form})
-
+        return render(request, 'donner/Feedback.html', {'form': form, 'feedback': 'active'})
 
 
 # dispaly about page
 def about(request):
-    return render(request, 'donner/About Us.html')
+    return render(request, 'donner/About Us.html', {'about': 'active'})
 
 
 # display conatact us page
 def contact(request):
-    return render(request, 'donner/contact Us.html')
+    return render(request, 'donner/contact Us.html', {'contact': 'active'})
+
+
+def bloodbank(request):
+    bloodbank = Bloodbank.objects.all().order_by("id")[:25]
+    return render(request, 'donner/banklist.html', {'object_list': bloodbank, 'bloodbank': 'active'})
+
+
+def news(request):
+    events = Event.objects.all().order_by("-id")[:25]
+    return render(request, 'donner/News & Events.html', {'object_list': events, 'event': 'active'})
 
 
 def newsView(request, pk):
     news = Event.objects.all().get(pk=pk)
-    return render(request, 'donner/news.html', {'news':news})
+    return render(request, 'donner/news.html', {'news': news, 'news': 'active'})
