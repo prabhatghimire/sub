@@ -3,3 +3,4 @@ Django==2.2.3
 django-bootstrap4==0.0.7
 django-crispy-forms==1.7.2
 graphene_django
+django-graphql-jwt
