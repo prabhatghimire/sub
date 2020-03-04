@@ -23,54 +23,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  			<a class="navbar-brand" href="{% url 'home' %}"></a>
-  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    		<span class="navbar-toggler-icon"></span>
-  			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item {{ home }}">
-						<a class="nav-link" href="{% url 'home' %}">Home</a>
-					</li>
-					<li class="nav-item {{ bloodbank }}">
-						<a class="nav-link" href="{% url 'bloodbank' %}">Blood Bank</a>
-					</li>
-					<li class="nav-item {{ event }}">
-						<a class="nav-link" href="{% url 'event' %}">News & Events</a>
-					</li>
-					<li class="nav-item {{ feedback }}">
-						<a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
-					</li>
-					<li class="nav-item {{ about }}">
-						<a class="nav-link" href="{% url 'about' %}">About Us</a>
-					</li>
-					<li class="nav-item {{ contact }}">
-						<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
-					</li>
-						{% if user.is_superuser %}
-					<li class="nav-item">
-							<a class="nav-link" href="/admin">Admin</a>
-					</li>
-					<li class="nav-item">
-							<a class="nav-link" href="{% url 'graphql' %}">Graphql</a>
-					</li>
-						{% else %}
-
-						{% endif %}
-				</ul>
-
-				{% if request.user.is_authenticated %}
-
-					<h4><small class="text-muted" style="margin-right: 20px;">WELCOME <a href="/accounts/profile">{{ user.first_name.upper }}</a>
-                 	<a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
-             		</small></h4>
-                {% else %}
-                	<h4><small class="text-muted" style="margin-right: 20px;">WELCOME USER
-						<a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
-            		</small></h4>{%endif %}
-			</div>
-		</nav>
+		{% include "donner/includes/navbar.html" %}
 	</header>
 	{% block content %}
 
