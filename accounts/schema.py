@@ -14,7 +14,7 @@ class UserType(DjangoObjectType):
     class Meta:
         model = User
         exclude = ['is_staff', 'is_active', 'is_superuser', 'groups',
-                   'user_permissions', 'last_login', 'password', 'donation_no', 'id', 'avatar']
+                   'user_permissions', 'last_login', 'password', 'donation_no', 'avatar']
         interfaces = (relay.Node, )
 
     """ @classmethod

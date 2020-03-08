@@ -18,14 +18,9 @@ from django.views.generic import ListView
 
 from django.urls import path
 
-from graphene_django.views import GraphQLView
-from graphql_jwt.decorators import jwt_cookie
-from django.views.decorators.csrf import csrf_exempt
-
 
 urlpatterns = [
     path('', views.home, name='home'),  # for home page url
-    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True)), name='graphql'),
     # to dispaly bloodbank url
     path('bloodbank/', views.bloodbank, name='bloodbank',),
     # get news and event form database and dispaly it
