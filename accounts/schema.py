@@ -62,10 +62,6 @@ class Query:
         return info.context.user
 
     def resolve_locations(self, info, **kwargs):
-        user = info.context.user
-        if user.is_anonymous:
-            raise Exception('Not logged in!')
-
         return Location.objects.all()
 
     def resolve_search_donor(self, info, **kwargs):
