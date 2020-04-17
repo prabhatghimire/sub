@@ -12,7 +12,7 @@ Live
 # Instalation of dependencies
 to install dependencies
 
-`pip install -r requirements.txt'
+`pip install -r requirements.txt`
 
 # run the project
 to run the project run the command
