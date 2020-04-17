@@ -9,7 +9,7 @@ to install dependencies
 
 pip install -r requirements.txt
 
-#run the project
+# run the project
 to run the project run the command
 python manage.py makemigrations
 python manage.py migrate
