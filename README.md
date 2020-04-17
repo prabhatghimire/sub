@@ -12,12 +12,12 @@ Live
 # Instalation of dependencies
 to install dependencies
 
-* `pip install -r requirements.txt'
+`pip install -r requirements.txt'
 
 # run the project
-* to run the project run the command
-* `python manage.py makemigrations`
-* `python manage.py migrate`
-* `python manage.py createsuperuser`
+to run the project run the command
+`python manage.py makemigrations`
+`python manage.py migrate`
+`python manage.py createsuperuser`
 
-* `python manage.py runserver`
+`python manage.py runserver`
