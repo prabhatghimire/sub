@@ -1,5 +1,5 @@
 #requirement
-Django==2.2.10
+Django==2.2.20
 django-bootstrap4==0.0.7
 django-crispy-forms==1.7.2
 graphene-django==2.8.2
